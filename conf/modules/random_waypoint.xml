@@ -1,0 +1,31 @@
+<!DOCTYPE module SYSTEM "module.dtd">
+
+<module name="random_waypoint">
+  <doc>
+    <description>
+	Moves a waypoint randomly.
+	</description>
+    </doc>
+    <settings>
+    <dl_settings>
+      <dl_settings name="RandomWaypoint">
+         <dl_setting var="wp_x_min" min="-4" step="0.5" max="-1" shortname="x_min"/>
+         <dl_setting var="wp_x_max" min="1" step="0.5" max="4" shortname="x_max"/>
+         <dl_setting var="wp_y_min" min="-4" step="0.5" max="-1" shortname="y_min"/>
+         <dl_setting var="wp_y_max" min="1" step="0.5" max="4" shortname="y_max"/>
+         <dl_setting var="wp_z_min" min="0.5" step="0.5" max="1.5" shortname="z_min"/>
+         <dl_setting var="wp_z_max" min="2" step="0.5" max="3.5" shortname="z_max"/>
+         <dl_setting var="wp_margin" min="0.05" step="0.05" max="0.5" shortname="margin"/>
+      </dl_settings>
+    </dl_settings>
+  </settings>
+  
+  <header>
+    <file name="random_waypoint.h"/>
+  </header>
+  <init fun="random_waypoint_init()"/>
+  <periodic fun="random_waypoint_periodic()" freq="4"/>
+  <makefile target="ap|nps">
+    <file name="random_waypoint.c"/>
+  </makefile>
+</module>

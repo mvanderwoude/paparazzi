@@ -1,0 +1,37 @@
+<!DOCTYPE module SYSTEM "module.dtd">
+
+<module name="udp_client">
+  <doc>
+    <description>
+client to a server over UDP
+    </description>
+  </doc>
+  <header>
+    <file name="udp_client.h" />
+  </header>
+  <init fun="udp_client_init()"/>
+  <periodic fun="udp_client_periodic()" freq="100" autorun="TRUE"/>
+  <event fun="udp_client_event()"/>
+  <makefile>
+
+    <!-- Configure default UART port and baudrate -->
+    <configure name="SERVER_PORT" default="UDP1" case="upper|lower"/>
+    <!--  <configure name="SERVER_HOST" default="192.168.42.8"/> bebop1 --> 
+    <configure name="SERVER_HOST" default="192.168.42.18"/> <!--  bebop2 -->
+    <configure name="SERVER_PORT_OUT" default="4245"/>
+    <configure name="SERVER_PORT_IN" default="4246"/>
+    <configure name="SERVER_BROADCAST" default="TRUE"/>
+
+    <!-- Enable udp and set address-->
+    <define name="USE_$(SERVER_PORT_UPPER)"/>
+    <define name="$(SERVER_PORT_UPPER)_HOST" value="$(SERVER_HOST)"/>
+    <define name="$(SERVER_PORT_UPPER)_PORT_OUT" value="$(SERVER_PORT_OUT)"/>
+    <define name="$(SERVER_PORT_UPPER)_PORT_IN" value="$(SERVER_PORT_IN)"/>
+    <define name="$(SERVER_PORT_UPPER)_BROADCAST" value="$(SERVER_BROADCAST)"/>
+    <define name="SERVER_PORT" value="$(SERVER_PORT_LOWER)"/>
+
+    <file name="udp_client.c"/>
+    <file name="pprz_transport.c" dir="pprzlink/src"/>
+  </makefile>
+</module>
+
